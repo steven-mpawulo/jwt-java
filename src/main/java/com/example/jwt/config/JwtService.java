@@ -17,8 +17,8 @@ import java.util.function.Function;
 public class JwtService {
     private final String SECRET = "e6144fe98e0adf59f924dbeb2f9da6d8016c5a7ad729e561dbd0f514bb576f0f";
     private Key getSigninKey() {
-        byte[] decodeBytes = Decoders.BASE64.decode(SECRET);
-        return Keys.hmacShaKeyFor(decodeBytes);
+        byte[] decodedBytes = Decoders.BASE64.decode(SECRET);
+        return Keys.hmacShaKeyFor(decodedBytes);
     }
     public Claims extractAllClaims(String token) {
         return Jwts.parser().setSigningKey(getSigninKey()).build().parseSignedClaims(token).getBody();
