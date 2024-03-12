@@ -63,6 +63,7 @@ public class UserController {
             User actualUser = userFromDatabase.get();
             Map<String, Object> claims = new HashMap<>();
             claims.put("id", actualUser.getId());
+            claims.put("role", actualUser.getRole());
             String token = jwtService.generateToken(actualUser, claims);
             Map<String, Object> response = new HashMap<>();
             response.put("token", token);
@@ -75,6 +76,7 @@ public class UserController {
 
     @GetMapping("/home")
     public String home() {
+
         return "am home";
     }
 }
