@@ -35,15 +35,13 @@ public class UserController {
         String password = (String)jsonData.get("password");
         String hashedPassword = passwordEncoder.encode(password);
         String userRole = (String) jsonData.get("role");
-         boolean isAdmin = "ADMIN".equalsIgnoreCase(userRole);
+         boolean isAdmin = "ADMIN".equals(userRole);
         User user = new User(
                 (String)jsonData.get("firstName"),
                 (String)jsonData.get("lastName"),
                 (String)jsonData.get("email"),
                 hashedPassword,
                 isAdmin ? Role.ADMIN : Role.USER
-
-
         );
         User savedUser = userRepository.save(user);
         Map<String, Object> claims = new HashMap<>();
