@@ -28,6 +28,7 @@ public class SecurityConfig {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(requests -> requests.requestMatchers("api/v1/auth/**").permitAll())
+                .authorizeHttpRequests(requests -> requests.requestMatchers("api/v1/home").hasRole("ADMIN"))
                 .authorizeHttpRequests(requests -> requests.anyRequest().authenticated())
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
