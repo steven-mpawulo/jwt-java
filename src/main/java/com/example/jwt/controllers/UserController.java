@@ -35,7 +35,7 @@ public class UserController {
         String password = (String)jsonData.get("password");
         String hashedPassword = passwordEncoder.encode(password);
         String userRole = (String) jsonData.get("role");
-         boolean isAdmin = "ADMIN".equals(userRole);
+         boolean isAdmin = "ADMIN".equalsIgnoreCase(userRole);
         User user = new User(
                 (String)jsonData.get("firstName"),
                 (String)jsonData.get("lastName"),
