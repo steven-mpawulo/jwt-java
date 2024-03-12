@@ -46,6 +46,7 @@ public class UserController {
         User savedUser = userRepository.save(user);
         Map<String, Object> claims = new HashMap<>();
         claims.put("id",savedUser.getId());
+        claims.put("role", savedUser.getRole());
         String token = jwtService.generateToken(savedUser, claims);
         response.put("token", token);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
