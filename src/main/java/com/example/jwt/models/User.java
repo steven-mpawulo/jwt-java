@@ -27,12 +27,15 @@ public class User implements UserDetails {
     @Column(unique = true)
     private String email;
     private String password;
+    @Enumerated
+    private Role role;
 
-    public User(String firstName, String lastName, String email, String password) {
+    public User(String firstName, String lastName, String email, String password, Role role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.role = role;
     }
 
     @Override

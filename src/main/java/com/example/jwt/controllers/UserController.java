@@ -1,6 +1,7 @@
 package com.example.jwt.controllers;
 
 import com.example.jwt.config.JwtService;
+import com.example.jwt.models.Role;
 import com.example.jwt.models.User;
 import com.example.jwt.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,11 +34,16 @@ public class UserController {
     public ResponseEntity<Map<String, Object>> signUp (@RequestBody Map<String, Object> jsonData) {
         String password = (String)jsonData.get("password");
         String hashedPassword = passwordEncoder.encode(password);
+        String userRole = (String) jsonData.get("role");
+         boolean isAdmin = "ADMIN".equals(userRole);
         User user = new User(
                 (String)jsonData.get("firstName"),
                 (String)jsonData.get("lastName"),
                 (String)jsonData.get("email"),
-                hashedPassword
+                hashedPassword,
+                isAdmin ? Role.ADMIN : Role.USER
+
+
         );
         User savedUser = userRepository.save(user);
         Map<String, Object> claims = new HashMap<>();
